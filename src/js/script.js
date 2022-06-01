@@ -22,6 +22,4 @@ window.addEventListener('DOMContentLoaded', () => {
 			searchIcon.classList.add('header__loop_active');
 		}
 	});
-
-	console.log('js gulp is working');
 });
