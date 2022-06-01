@@ -63,79 +63,223 @@
     <section class="catalog">
         <div class="container">
             <div class="catalog__wrapper">
+
                 <!-- All filters -->
                 <div class="catalog-filters">
                     <div class="catalog-filters__title">Каталог</div>
+                    <!-- Subfilters -->
                     <div class="catalog-filters-main">
                         <div id="filter-all" class="catalog-filters-main__subfilter">Все</div>
-                        <div id="filter-parts" class="catalog-filters-main__subfilter">Запчасти и расходники <span>^</span></div>
-                        <div id="filter-mark" class="catalog-filters-main__subfilter">Марка автомобиля <span>^</span></div>
+                        <div id="filter-parts" class="catalog-filters-main__subfilter catalog-filters-main__subfilter_active">Запчасти и расходники <span> ></span></div>
+                        <div id="filter-mark" class="catalog-filters-main__subfilter">Марка автомобиля <span> ></span></div>
                     </div>
+                    <!--// Subfilters -->
+
+                    <!-- Filters -->
                     <div class="catalog-filters__block">
+                        <!-- Parts filters -->
                         <div class="catalog-filters__parts">
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">А</li>
+                                <li class="catalog-filters__filter">Авторазбор</li>
+                                <li class="catalog-filters__filter">Аккумуляторы</li>
+                                <li class="catalog-filters__filter">Аксессуары</li>
+                                <li class="catalog-filters__filter">АКПП</li>
+                                <li class="catalog-filters__filter">Амортизаторы</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">Б</li>
+                                <li class="catalog-filters__filter">Болты</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">В</li>
+                                <li class="catalog-filters__filter">Ветровики</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">Г</li>
+                                <li class="catalog-filters__filter">ГБО</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">Д</li>
+                                <li class="catalog-filters__filter">Датчики</li>
+                                <li class="catalog-filters__filter">Двигатель</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">З</li>
+                                <li class="catalog-filters__filter">Запчасти</li>
+                                <li class="catalog-filters__filter">Защита</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">И</li>
+                                <li class="catalog-filters__filter">Инструменты</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">К</li>
+                                <li class="catalog-filters__filter">Камеры</li>
+                                <li class="catalog-filters__filter">Коврики</li>
+                                <li class="catalog-filters__filter">Колодки</li>
+                                <li class="catalog-filters__filter">Крепежи</li>
+                                <li class="catalog-filters__filter">Кузов</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">Л</li>
+                                <li class="catalog-filters__filter">Лампочки</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">М</li>
+                                <li class="catalog-filters__filter">Магнитолы</li>
+                                <li class="catalog-filters__filter">Масла</li>
+                                <li class="catalog-filters__filter">Молдинг</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">Н</li>
+                                <li class="catalog-filters__filter">Наклейки</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">О</li>
+                                <li class="catalog-filters__filter">Оптика</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">П</li>
+                                <li class="catalog-filters__filter">Патрубки</li>
+                                <li class="catalog-filters__filter">Полики</li>
+                                <li class="catalog-filters__filter">Проставки</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">Р</li>
+                                <li class="catalog-filters__filter">Радиаторы</li>
+                                <li class="catalog-filters__filter">Ремни</li>
+                                <li class="catalog-filters__filter">Ролики</li>
+                                <li class="catalog-filters__filter">Рулевая</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">С</li>
+                                <li class="catalog-filters__filter">Сальники</li>
+                                <li class="catalog-filters__filter">Свечи</li>
+                                <li class="catalog-filters__filter">Секретки</li>
+                                <li class="catalog-filters__filter">Сигнализация</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">Т</li>
+                                <li class="catalog-filters__filter">Тормозной мех. </li>
+                                <li class="catalog-filters__filter">Тюнинг</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">Ф</li>
+                                <li class="catalog-filters__filter">Фильтры</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">Х</li>
+                                <li class="catalog-filters__filter">Химия</li>
+                                <li class="catalog-filters__filter">Ходовка</li>
                             </ul>
                             <ul class="catalog-filters__box">
-                                <li class="catalog-filters__filter"></li>
+                                <li data-letter class="catalog-filters__letter">Э</li>
+                                <li class="catalog-filters__filter">Электрика</li>
                             </ul>
                         </div>
-                        <hr class="hr">
+                        <!--// Parts filters -->
+                        <hr class="catalog-filters__hr">
+                        <!-- Marks filters -->
                         <div class="catalog-filters__mark">
-
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">А</li>
+                                <li class="catalog-filters__filter">Американские</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">Г</li>
+                                <li class="catalog-filters__filter">Грузовые</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">К</li>
+                                <li class="catalog-filters__filter">Корейские</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">Н</li>
+                                <li class="catalog-filters__filter">Немецкие</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">Ф</li>
+                                <li class="catalog-filters__filter">Французские</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">Я</li>
+                                <li class="catalog-filters__filter">Японские</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">A</li>
+                                <li class="catalog-filters__filter">AUDI</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">B</li>
+                                <li class="catalog-filters__filter">BMW</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">C</li>
+                                <li class="catalog-filters__filter">CHEVROLET</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">D</li>
+                                <li class="catalog-filters__filter">DAEWOO</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">F</li>
+                                <li class="catalog-filters__filter">FORD</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">H</li>
+                                <li class="catalog-filters__filter">HONDA</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">I</li>
+                                <li class="catalog-filters__filter">INFINITI</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">K</li>
+                                <li class="catalog-filters__filter">KIA</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">L</li>
+                                <li class="catalog-filters__filter">LADA</li>
+                                <li class="catalog-filters__filter">LEXUS</li>
+                                
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">M</li>
+                                <li class="catalog-filters__filter">MAZDA</li>
+                                <li class="catalog-filters__filter">MERCEDES</li>
+                                <li class="catalog-filters__filter">MITSUBISHI</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">N</li>
+                                <li class="catalog-filters__filter">NISSAN</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">O</li>
+                                <li class="catalog-filters__filter">OPEL</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">R</li>
+                                <li class="catalog-filters__filter">RENAULT</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">S</li>
+                                <li class="catalog-filters__filter">SKODA</li>
+                                <li class="catalog-filters__filter">SUBARU</li>
+                                <li class="catalog-filters__filter">SUZUKI</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">T</li>
+                                <li class="catalog-filters__filter">TOYOTA</li>
+                            </ul>
+                            <ul class="catalog-filters__box">
+                                <li data-letter class="catalog-filters__letter">V</li>
+                                <li class="catalog-filters__filter">VOLKSWAGEN</li>
+                            </ul>
                         </div>
+                        <!--// Mark filters -->
                     </div>
+                    <!--// Filters -->
                 </div>
                 <!--// All filters -->
 

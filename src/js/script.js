@@ -22,4 +22,40 @@ window.addEventListener('DOMContentLoaded', () => {
 			searchIcon.classList.add('header__loop_active');
 		}
 	});
+
+	// Subilters
+	// Subfilter buttons
+	const allFiltersBtn = document.querySelector('#filter-all'),
+		partsFiltersBtn = document.querySelector('#filter-parts'),
+		markFiltersBtn = document.querySelector('#filter-mark');
+	// Subfilter blocks
+	const partsBlock = document.querySelector('.catalog-filters__parts'),
+		markBlock = document.querySelector('.catalog-filters__mark'),
+		hrBlock = document.querySelector('.catalog-filters__hr');
+
+	// Adding event listeners
+	allFiltersBtn.addEventListener('click', () => {
+		allFiltersBtn.classList.add('catalog-filters-main__subfilter_active');
+		partsFiltersBtn.classList.remove('catalog-filters-main__subfilter_active');
+		markFiltersBtn.classList.remove('catalog-filters-main__subfilter_active');
+		partsBlock.style.display = 'block';
+		hrBlock.style.display = 'block';
+		markBlock.style.display = 'block';
+	});
+	partsFiltersBtn.addEventListener('click', () => {
+		allFiltersBtn.classList.remove('catalog-filters-main__subfilter_active');
+		partsFiltersBtn.classList.add('catalog-filters-main__subfilter_active');
+		markFiltersBtn.classList.remove('catalog-filters-main__subfilter_active');
+		partsBlock.style.display = 'block';
+		hrBlock.style.display = 'none';
+		markBlock.style.display = 'none';
+	});
+	markFiltersBtn.addEventListener('click', () => {
+		allFiltersBtn.classList.remove('catalog-filters-main__subfilter_active');
+		partsFiltersBtn.classList.remove('catalog-filters-main__subfilter_active');
+		markFiltersBtn.classList.add('catalog-filters-main__subfilter_active');
+		partsBlock.style.display = 'none';
+		hrBlock.style.display = 'none';
+		markBlock.style.display = 'block';
+	});
 });

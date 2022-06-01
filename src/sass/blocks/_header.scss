@@ -1,9 +1,12 @@
 .header{
-	position: relative;
+	position: fixed;
+	top: 0;
 	font-size: 18px;
 	font-weight: 500;
 	height: 73px;
+	width: 100%;
 	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 2;
     .header__wrapper{
         position: relative;
         height: 100%;
