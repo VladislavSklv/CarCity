@@ -1,0 +1,27 @@
+.button{
+	width: 250px;
+	height: 77px;
+	background: #FEC709;
+	border-radius: 10px;
+	font-weight: 700;
+	font-size: 24px;
+	text-align: center;
+	color: #000000;
+	border: none;
+	cursor: pointer;
+	transition: all 0.5s;
+}
+.button:hover{
+	background-color: rgba(254, 199, 9, 0.7);
+}
+.button:active{
+	background-color: rgba(255, 147, 49, 1);
+}
+@media(max-width: 530px){
+	.button{
+		width: 151px;
+		height: 40px;
+		font-size: 14px;
+		line-height: 17px;
+	}
+}

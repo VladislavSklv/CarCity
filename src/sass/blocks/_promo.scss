@@ -1,0 +1,136 @@
+.promo{
+	margin-top: 58px;
+}
+.promo .container{
+	max-width: 1232px;
+}
+.promo .promo__wrapper{
+	position: relative;
+	margin-bottom: 59px;
+}
+.promo .promo__logo{
+	position: absolute;
+	left: 0;
+	top: 0;
+	transform: translateY(-40%);
+	width: 150px;
+	height: 44px;
+}
+.promo .promo__logo img{
+	width: 100%;
+}
+.promo .promo__h1{
+	font-family: 'Times New Roman';
+	font-weight: 700;
+	font-size: 40px;
+	line-height: 46px;
+	text-transform: uppercase;
+	color: #FFFFFF;
+	text-align: center;
+}
+.promo .promo__hr{
+	margin: 24px auto;
+	width: 268px;
+	height: 3px;
+	background-color: #FEC709;
+	border: none;
+}
+.promo .promo__subtitle{
+	width: 539px;
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 29px;
+	text-align: center;
+	color: #FFFFFF;
+	margin: 0 auto;
+}
+.promo .button{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+.promo .promo__img{
+	width: 100%;
+}
+.promo .promo__img img{
+	width: 100%;
+}
+@media(max-width: 1144px){
+	.promo .container{
+		max-width: 944px;
+	}
+	.promo .promo__wrapper{
+		margin-bottom: 48px;
+	}
+	.promo .promo__logo{
+		position: relative;
+		margin: 0 auto;
+		width: 100px;
+		height: 30px;
+	}
+	.promo .promo__h1{
+		text-transform: none;
+	}
+	.promo .promo__subtitle{
+		width: 100%;
+	}
+	.promo .button{
+		display: block;
+		position: relative;
+		margin: 36px auto 0 auto;
+	}
+}
+@media(max-width: 768px){
+	.promo .container{
+		max-width: 668px;
+	}
+	.promo .promo__wrapper{
+		margin-bottom: 36px;
+	}
+	.promo .promo__h1{
+		white-space: nowrap;
+	}
+	.promo .promo__subtitle{
+		font-size: 20px;
+		line-height: 24px;
+	}
+}
+@media(max-width: 710px){
+	.promo .promo__h1{
+		white-space: normal;
+	}
+}
+@media(max-width: 530px){
+	.promo{
+		margin-top: 18px;
+	}
+	.promo .container{
+		max-width: 308px;
+	}
+	.promo .promo__wrapper{
+		margin-bottom: 24px;
+	}
+	.promo .promo__logo{
+		width: 80px;
+		height: 24px;
+		transform: none;
+		margin-bottom: 13px;
+	}
+	.promo .promo__h1{
+		font-size: 16px;
+		line-height: 18px;
+		color: #000;
+	}
+	.promo .promo__hr{
+		width: 136px;
+		margin: 8px auto;
+	}
+	.promo .promo__subtitle{
+		color: #4F4F4F;
+		font-size: 13px;
+		line-height: 16px;
+	}
+	.promo .button{
+		margin: 16px auto 0 auto; 
+	}
+}

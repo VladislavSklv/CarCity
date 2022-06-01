@@ -1,0 +1,39 @@
+@import 'libs/fonts';
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: 'Exo2', sans-serif;
+}
+body{
+	background-color: #646464;
+}
+.container{
+	position: relative;
+	height: 100%;
+	max-width: 1748px;
+	padding: 0 10px;
+	margin: 0 auto;
+}
+@media(max-width: 1124px){
+	.container{
+		max-width: 944px;
+	}
+}
+@media(max-width: 878px){
+	.container{
+		max-width: 688px;
+	}
+}
+@media(max-width: 530px){
+	body{
+		background-color: #fff;
+	}
+	.container{
+		max-width: 308px
+	}	
+}
+
+@import 'blocks/header';
+@import 'blocks/buttons';
+@import 'blocks/promo';
