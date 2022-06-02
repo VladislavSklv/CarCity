@@ -32,7 +32,7 @@
         color: #fff;
         &__subfilter{
             margin-bottom: 16px;
-            transition: all 0.3s;
+            transition: all 0.4s;
             cursor: pointer;
             span{
                 transition: all 0.4s;
@@ -51,16 +51,30 @@
                 }
             }
         }
+        &::before{
+            content: '';
+            position: absolute;
+            left: 16px;
+            display: block;
+            width: 5px;
+            height: 44px;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50px;
+        }
     }
     &__parts, &__mark{
         height: 300px;
         column-count: 5;
         column-width: 150px;
-        column-gap: 75px;
+        column-gap: 100px;
         transition: 0.3s all;
     }
     &__box{
         list-style: none;
+    }
+    &__box-with-lr{
+        width: 100%;
+        display: inline-block;
     }
     &__letter{
         color: #FEC709;
@@ -86,5 +100,61 @@
         background-color: #FEC709;
         border: none;
         margin: 18px auto;
+    }
+    &::after{
+        content: '';
+        position: absolute;
+        right: 16px;
+        display: block;
+        width: 5px;
+        height: 100px;
+        background-color: rgba(255, 255, 255, 0.6);
+        border-radius: 50px;
+    }
+}
+
+@media(max-width: 1600px){
+    .catalog-filters{
+        justify-content: flex-start;
+        padding-right: 0;
+        &__title{
+            width: 266px;
+        }
+        &__parts, &__mark{
+            column-count: auto;
+            height: 415px;
+            column-width: 150px;
+            margin-left: 40%;
+        }
+        &__letter, &__filter{
+            font-size: 18px;
+            line-height: 22px;
+        }
+        &__hr{
+            width: 450%;
+            margin-left: 40%;
+        }
+    }
+}
+@media(max-width: 1124px){
+    .catalog-filters{
+        &-main{
+            width: 235px;
+            &__subfilter{
+                font-size: 18px;
+                line-height: 22px;
+            }
+        }
+        &__parts, &__mark{
+            column-gap: 40px;
+            margin-left: 20%;
+        }
+        &__mark{
+            height: 300px;
+        }
+        &__hr{
+            margin-left: 15%;
+            width: 390%;
+        }
     }
 }
