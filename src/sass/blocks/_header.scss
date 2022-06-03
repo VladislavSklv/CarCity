@@ -47,9 +47,14 @@
             }
         }
         .header-menu__item_list{
-            background: none;
-            border: none;
-            font-size: 18px;
+            &::after{
+				content: '^';
+				display: inline-block;
+				font-size: 24px;
+				position: absolute;
+				top: 0;
+				right: -20px;
+			}
         }
     }
     .header__search-wrap{
@@ -103,8 +108,8 @@
 	.header .header-menu{
 		width: 425px;
 	}
-	.header .header-menu .header-menu__item_list{
-		font-size: 16px;
+	.header .header-menu .header-menu__item_list::after {
+		display: none;
 	}
 	.header .header__search-wrap{
 		width: 213px;

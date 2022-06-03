@@ -15,12 +15,7 @@
                 <!-- Header list -->
                 <div class="header-menu">
                     <div class="header-menu__item"><a href="#">Главная</a></div>
-                    <select id="header-select" class="header-menu__item header-menu__item_list">
-                        <option value="galery"><a href="#">Галерея визиток</a></option>
-                        <option value="2"><a href="#">2</a></option>
-                        <option value="3"><a href="#">3</a></option>
-                        <option value="4"><a href="#">4</a></option>
-                    </select>
+                    <div class="header-menu__item header-menu__item_list"><a href="#">Галерея визиток</a></div>
                     <div class="header-menu__item"><a href="#">Блог</a></div>
                     <div class="header-menu__item"><a href="#">Контакты</a></div>
                 </div>
@@ -67,18 +62,22 @@
                 <!-- All filters -->
                 <div class="catalog-filters">
                     <div class="catalog-filters__title">Каталог</div>
+                    <div class="catalog-filters__category">Категория</div>
+                    <div class="catalog-filters__chosen-subfilter">Запчасти и расходники</div>
                     <!-- Subfilters -->
                     <div class="catalog-filters-main">
                         <div id="filter-all" class="catalog-filters-main__subfilter">Все</div>
                         <div id="filter-parts" class="catalog-filters-main__subfilter catalog-filters-main__subfilter_active">Запчасти и расходники <span> ></span></div>
                         <div id="filter-mark" class="catalog-filters-main__subfilter">Марка автомобиля <span> ></span></div>
+                        <div id="filter-mark" class="catalog-filters-main__subfilter catalog-filters-main__subfilter_hidden">Шины <span> ></span></div>
+                        <div id="filter-mark" class="catalog-filters-main__subfilter catalog-filters-main__subfilter_hidden">Лобовые стекла <span> ></span></div>
                     </div>
                     <!--// Subfilters -->
 
                     <!-- Filters -->
                     <div class="catalog-filters__block">
                         <!-- Parts filters -->
-                        <div class="catalog-filters__parts">
+                        <div class="catalog-filters__parts catalog-filters__parts_active">
                             <ul class="catalog-filters__box">
                                 <div class="catalog-filters__box-with-lr">
                                     <li data-letter class="catalog-filters__letter">А</li>
