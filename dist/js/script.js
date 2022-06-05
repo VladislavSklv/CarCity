@@ -10,6 +10,29 @@ window.addEventListener('DOMContentLoaded', () => {
 			item.classList.remove(classes[i]);
 		});
 	}
+	function renderChosenFilters(){
+		const chosenFilterHTML = `<div class="catalog__chosen-filter fadein">${chosenFilter.innerText} <span class="cross">✖</span></div>`;
+		if(!chosenFilters.find(i => i === chosenFilterHTML)){
+			chosenFiltersBlock.insertAdjacentHTML('beforeend', chosenFilterHTML);
+			chosenFilters.push(chosenFilterHTML);
+		}
+			
+		// Removing chosen filters
+		const chosenFiltersCrosses = document.querySelectorAll('.cross');
+
+		chosenFiltersCrosses.forEach(cross => {
+			cross.addEventListener('click', () => {
+				chosenFilters = chosenFilters.filter(i => i != `<div class="catalog__chosen-filter fadein">${cross.parentNode.innerHTML}</div>`);
+				cross.parentNode.classList.add('fadeout');
+				setTimeout(() => {cross.parentNode.remove()}, 499);
+			});
+			cross.removeEventListener('click', () => {
+				chosenFilters = chosenFilters.filter(i => i != `<div class="catalog__chosen-filter fadein">${cross.parentNode.innerHTML}</div>`);
+				cross.parentNode.classList.add('fadeout');
+				setTimeout(() => {cross.parentNode.remove()}, 499);
+			});
+		});
+	}
 
 	// hamburger switch classes and navbar
 	const hamburger = document.querySelector('.header__hamburger');
@@ -44,9 +67,11 @@ window.addEventListener('DOMContentLoaded', () => {
 		chosenSubfilterBlock = document.querySelector('.catalog-filters__chosen-subfilter'),
 		partsBlock = document.querySelector('.catalog-filters__parts'),
 		markBlock = document.querySelector('.catalog-filters__mark'),
-		hrBlock = document.querySelector('.catalog-filters__hr');
+		hrBlock = document.querySelector('.catalog-filters__hr'),
+		chosenSubfilter = document.querySelector('.catalog__chosen-subfilter'),
+		subCross = document.querySelector('.js-sub-cross');
 
-	// Adding event listeners
+	// Adding event listeners on filters section
 	mainSubfiltersBlock.addEventListener('click', event => {
 		let itemsToRemove, classesToRemove, itemsToAdd, classesToAdd;
 		switch(event.target){
@@ -57,6 +82,11 @@ window.addEventListener('DOMContentLoaded', () => {
 				classesToAdd = ['catalog-filters-main__subfilter_active', "catalog-filters__parts_active", "catalog-filters__mark_active", "catalog-filters__hr_active"];
 				removeClasses(itemsToRemove, classesToRemove);
 				addClasses(itemsToAdd, classesToAdd);
+				chosenSubfilter.classList.remove('fadein');
+				chosenSubfilter.classList.add('fadeout');
+				setTimeout(() => {
+					chosenSubfilter.style.display = 'none';
+				}, 499);
 				chosenSubfilterBlock.innerText = allFiltersBtn.innerText;
 				break;
 			case partsFiltersBtn:
@@ -66,6 +96,13 @@ window.addEventListener('DOMContentLoaded', () => {
 				classesToAdd = ['catalog-filters-main__subfilter_active', "catalog-filters__parts_active"];
 				removeClasses(itemsToRemove, classesToRemove);
 				addClasses(itemsToAdd, classesToAdd);
+				/* chosenSubfilter.innerText = partsFiltersBtn.innerText; */
+				console.log(partsFiltersBtn.textContent);
+				chosenSubfilter.classList.remove('fadeout');
+				chosenSubfilter.classList.add('fadein');
+				setTimeout(() => {
+					chosenSubfilter.style.display = 'inline-block';
+				}, 499);
 				chosenSubfilterBlock.innerText = partsFiltersBtn.innerText;
 				break;
 			case markFiltersBtn:
@@ -75,9 +112,24 @@ window.addEventListener('DOMContentLoaded', () => {
 				classesToAdd = ['catalog-filters-main__subfilter_active', "catalog-filters__mark_active"];
 				removeClasses(itemsToRemove, classesToRemove);
 				addClasses(itemsToAdd, classesToAdd);
+				/* chosenSubfilter.innerText = markFiltersBtn.innerText; */
+				chosenSubfilter.classList.remove('fadeout');
+				chosenSubfilter.classList.add('fadein');
+				setTimeout(() => {
+					chosenSubfilter.style.display = 'inline-block';
+				}, 499);
 				chosenSubfilterBlock.innerText = markFiltersBtn.innerText;
 				break;
 		}
+	});
+
+	subCross.addEventListener('click', () => {
+		subCross.parentNode.classList.add('fadeout');
+		setTimeout(() => {
+			subCross.parentNode.style.display = 'none';
+		}, 499);
+		removeClasses([partsFiltersBtn, markFiltersBtn, categoriesMenu, mainSubfiltersBlock], ['catalog-filters-main__subfilter_active', 'catalog-filters-main__subfilter_active', 'catalog-filters__category_active', 'catalog-filters-main_active']);
+			addClasses([allFiltersBtn, partsBlock, markBlock, hrBlock], ['catalog-filters-main__subfilter_active', "catalog-filters__parts_active", "catalog-filters__mark_active", "catalog-filters__hr_active"]);
 	});
 
 	// Category menu
@@ -90,6 +142,27 @@ window.addEventListener('DOMContentLoaded', () => {
 		} else {
 			categoriesMenu.classList.remove('catalog-filters__category_active');
 			mainSubfiltersBlock.classList.remove('catalog-filters-main_active');
+		}
+	});
+
+	// Items/Cards count
+	const itemsCounter = document.querySelector('.catalog-counter__text');
+
+	itemsCounter.addEventListener('click', () => {
+		if(!itemsCounter.classList.contains('catalog-counter__text_active')) addClasses([itemsCounter], ['catalog-counter__text_active']);
+		else removeClasses([itemsCounter], ['catalog-counter__text_active']);
+	});
+
+	// Adding chosen filters
+	const chosenFiltersBlock = document.querySelector('.catalog__chosen-filters'),
+		allFiltersBlock = document.querySelector('.catalog-filters__block');
+	let chosenFilters = [];
+	let chosenFilter;
+
+	allFiltersBlock.addEventListener('click', event => {
+		if(event.target.classList.contains('catalog-filters__filter')){
+			chosenFilter = event.target;
+			renderChosenFilters();
 		}
 	});
 });
