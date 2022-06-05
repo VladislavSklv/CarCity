@@ -6,7 +6,7 @@
 	height: 73px;
 	width: 100%;
 	background-color: rgba(0, 0, 0, 0.8);
-	z-index: 2;
+	z-index: 3;
     .header__wrapper{
         position: relative;
         height: 100%;
@@ -134,7 +134,7 @@
 		justify-content: space-between;
 		align-items: center;
 		cursor: pointer;
-		z-index: 4;
+		z-index: 5;
 	}
 	.header .header__hamburger span{
 		width: 27px;
@@ -172,7 +172,7 @@
 		background-color: rgba(58, 58, 58, 1);
 		padding: 144px 0 0 50px;
 		transition: all 0.8s;
-		z-index: 3;
+		z-index: 4;
 	}
 	.header .header-navbar_active{
 		left: 0;
@@ -206,7 +206,7 @@
 		font-size: 17px;
 	}
 	.header .header__search-wrap{
-		z-index: 4;
+		z-index: 5;
 		background-color: transparent;
 	}
 	.header .header__search{

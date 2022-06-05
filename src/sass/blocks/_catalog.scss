@@ -14,6 +14,7 @@
     }
     &-counter{
         position: relative;
+        z-index: 2;
         &:hover{
             .sub-cross{
                 color: rgba(254, 199, 9, 0.7);
@@ -55,7 +56,7 @@
             line-height: 17px;
             color: #000;
             left: 0;
-            padding: 19px 14px 0 14px;
+            padding: 9px 14px 0;
             opacity: 0;
             pointer-events: none;
             transform: translateY(-25%);
@@ -63,6 +64,8 @@
         }
         &__number{
             height: 44px;
+            display: flex;
+            align-items: center;
             cursor: pointer;
         }
     }
@@ -94,11 +97,56 @@
         color: #FEC709;
     }
 }
+@media(max-width: 1211px){
+    .catalog{
+        &__chosen-filters{
+            padding-left: 24px;
+        }
+        &-counter{
+            &__number{
+                &:nth-child(n+4){
+                    display: none;
+                }
+            }
+        }
+    }
+}
+@media(max-width: 878px){
+    .catalog{
+        &__chosen-filters{
+            min-height: 36px;
+            padding-left: 16px;
+            margin-bottom: 0;
+        }
+        &-counter, &__chosen-filter, &__chosen-subfilter{
+            border-radius: 7px;
+            font-size: 14px;
+            line-height: 17px;
+            padding: 9px 12px;
+        }
+        &-counter{
+            &__number{
+                &:nth-child(n+3){
+                    display: none;
+                }
+            }
+        }
+    }
+    .cross, .sub-cross{
+        font-size: 14px;
+    }
+}
 @media(max-width: 530px){
     .catalog{
         .container{
             padding: 0;
             max-width: 100%;
+        }
+        &-counter{
+            display: none;
+        }
+        &__chosen-subfilter{
+            display: none;
         }
     }
 }

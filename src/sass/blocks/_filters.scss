@@ -106,11 +106,16 @@
     &__filter{
         color: #fff;
         font-size: 19px;
+        font-weight: 500;
         line-height: 24px;
         cursor: pointer;
         transition: all 0.3s;
         &:hover{
             color: #FEC709;
+        }
+        &_active{
+            font-weight: 600;
+            text-decoration: underline;
         }
     }
     &__hr{
@@ -357,6 +362,7 @@
         &__filter{
             font-size: 13px;
             line-height: 17px;
+            font-weight: 400;
         }
         &__parts, &__mark{
             column-gap: 14px;
