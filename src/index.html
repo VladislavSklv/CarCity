@@ -380,15 +380,15 @@
                 <!--// Chosen filters -->
 
                 <!-- All items -->
-                <div class="catalog__items">
+                <div class="card__wrapper">
                     <!-- Item -->
-                    <div class="catalog-item">
-                        <div class="catalog-item__img">
+                    <div class="card">
+                        <div class="card__img">
                             <img src="img/items/item-1.jpg" alt="image">
                         </div>
-                        <div class="catalog-item__info">
-                            <div class="catalog-item__title">Авторынок Car City 2 ярус 206 бутик</div>
-                            <div class="catalog-item__subtitle">Масла, фильтры, колодки, свечи, дворники, лампочки, химия, ГБО</div>
+                        <div class="card__info">
+                            <div class="card__title">Авторынок Car City 2 ярус 206 бутик</div>
+                            <div class="card__text">Масла, фильтры, колодки, свечи, дворники, лампочки, химия, ГБО</div>
                         </div>
                     </div>
                     <!--// Item -->
@@ -408,13 +408,13 @@
     <footer class="footer">
         <div class="container">
             <div class="footer__wrapper">
-                <ul class="footer-list">
-                    <li class="footer-list__item">О наc</li>
-                    <li class="footer-list__item">Контакты</li>
-                    <li class="footer-list__item">Вакансии</li>
-                    <li class="footer-list__item">Услуги</li>
-                    <li class="footer-list__item">Визитки</li>
-                </ul>
+                <div class="footer-list">
+                    <a href="#" class="footer-list__item">О наc</a>
+                    <a href="#" class="footer-list__item">Контакты</a>
+                    <a href="#" class="footer-list__item">Вакансии</a>
+                    <a href="#" class="footer-list__item">Услуги</a>
+                    <a href="#" class="footer-list__item">Визитки</a>
+                </div>
     
                 <div class="footer__hrefs">
                     <a href="#" class="footer__href">Политики конфиденциальности</a>
@@ -431,5 +431,30 @@
         </div>
     </footer>
     <!--// Footer -->
+
+    <!-- Modals -->
+    <div class="modal-opacity"></div>
+
+    <div class="modal-center">
+        <div class="modal-center__block">
+            <div class="modal-center__logo">
+                <img src="img/logo/logopromo.png" alt="promologo">
+            </div>
+            <div class="modal-center__info-wrap">
+                <div class="modal-center__info">Работаем ежедневно 09.00 - 19.00</div>
+                <div class="modal-center__info">Администрация ТЦ +7 727 319 13 00</div>
+                <div class="modal-center__info">Алматы,<br> мкр. Баян-аул 57а</div>
+            </div>
+            <div class="modal-center__wrapper">
+                <div class="modal-center__item">Площадь торгового центра –31 585 кв. м.</div>
+                <div class="modal-center__item">Терминалы 24KZ, QIWI, Interpay, Kaspi Postomat</div>
+                <div class="modal-center__item">Услуги курьерской службы - AlemTat, Avis Logistics</div>
+                <div class="modal-center__item">Отделение банка НурБанк</div>
+                <div class="modal-center__item">Банкоматы Halyk Bank , Банк ЦентрКредит, ForteBank, Kaspi Bank, Сбербанк</div>
+                <div class="modal-center__item">Парковка на 500 автомашин</div>
+            </div>
+        </div>
+    </div>
+    <!--// Modals -->
 
 @@include('parts/footer.html')
