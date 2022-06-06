@@ -1,5 +1,6 @@
 .catalog{
     margin-top: 59px;
+    margin-bottom: 50px;
    &__wrapper{
         min-height: 1502px;
         background-color: rgba(255, 255, 255, 0.3);;
@@ -113,6 +114,7 @@
 }
 @media(max-width: 878px){
     .catalog{
+        margin-bottom: 36px;
         &__chosen-filters{
             min-height: 36px;
             padding-left: 16px;
@@ -138,6 +140,7 @@
 }
 @media(max-width: 530px){
     .catalog{
+        margin-bottom: 0;
         .container{
             padding: 0;
             max-width: 100%;
