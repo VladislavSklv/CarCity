@@ -21,14 +21,16 @@
     border-radius: 30px;
     border: 5px solid #C4C4C4;
     &__block{
-        display: block;
+        display: flex;
+        justify-content: space-between;
         position: absolute;
         bottom: 0;
         left: 0;
         width: 100%;
         height: 356px;
         background-color: #fff;
-        border-radius: 30px;
+        border-radius: 30px 30px 25px 25px;
+        padding: 24px;
         &::before {
             content: "";
             position: absolute;
@@ -39,6 +41,72 @@
             background: linear-gradient(180deg, #FEC709 0%, rgba(254, 199, 9, 0) 100%);
             border-radius: 30px;
             z-index: -1;
-          }
+        }
+    }
+    &__logo{
+        width: 124px;
+        height: 38px;
+        margin: 0 auto;
+        img{
+            width: 100%;
+        }
+    }
+    &__info-wrap{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 229px;
+    }
+    &__gradient{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 229px;
+        height: 78px;
+        background: linear-gradient(178.82deg, rgba(251, 187, 46, 0.5) 1%, rgba(0, 84, 159, 0.5) 98.99%);  
+        border-radius: 10px;
+        margin-top: 12px;
+    }
+    &__info{
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 225px;
+        height: 74px;
+        background-color: #fff;
+        border-radius: 10px;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 32px;
+        padding-left: 9px;
+    }
+    &__wrapper{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    &__item{
+        width: 440px;
+        height: 92px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(206, 232, 255, 0.8);
+        border-radius: 10px;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+        text-align: center;
+        margin-left: 16px;
+        margin-bottom: 16px;
+    }
+}
+@media(max-width: 1500px){
+    .modal-center{
+        height: 528px;
+        width: 925px;
+        background: url('../img/modal.jpg') top/contain no-repeat;
+        &__block{
+            height: 56%;
+        }
     }
 }
