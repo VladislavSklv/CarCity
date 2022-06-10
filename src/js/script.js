@@ -172,4 +172,30 @@ window.addEventListener('DOMContentLoaded', () => {
 			renderChosenFilters();
 		}
 	});
+
+	// More info modal
+	const moreInfoBtn = document.querySelector('.js-more-info'),
+		modalOpacity = document.querySelector('.modal-opacity'),
+		modalCenter = document.querySelector('.modal-center');
+
+
+	moreInfoBtn.addEventListener('click', () => {
+		modalOpacity.style.display = 'block';
+		modalCenter.style.display = 'block';
+		removeClasses([modalOpacity, modalCenter], ['fadeout', 'fadeout']);
+		addClasses([modalOpacity, modalCenter], ['fadein', 'fadein']);
+		modalOpacity.style.opacity = '1';
+		modalCenter.style.opacity = '1';
+	});
+
+	modalOpacity.addEventListener('click', () => {
+		removeClasses([modalOpacity, modalCenter], ['fadein', 'fadein']);
+		addClasses([modalOpacity, modalCenter], ['fadeout', 'fadeout']);
+		setTimeout(() => {
+			modalOpacity.style.display = 'none';
+			modalCenter.style.display = 'none';
+			modalOpacity.style.opacity = '0';
+			modalCenter.style.opacity = '0';
+		}, 499)
+	});
 });
