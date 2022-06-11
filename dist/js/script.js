@@ -1,4 +1,8 @@
 window.addEventListener('DOMContentLoaded', () => {
+	const cardsContainer = document.querySelector('.card__wrapper'),
+		allFilters = document.querySelectorAll('.catalog-filters__filter');
+
+	getCards();
 
 	function addClasses(items, classes){
 		items.forEach((item, i) => {
@@ -10,8 +14,158 @@ window.addEventListener('DOMContentLoaded', () => {
 			item.classList.remove(classes[i]);
 		});
 	}
+	async function getCards(){
+		const response = await fetch('./js/cards.json');
+		const cardsArray = await response.json();
+		
+		renderCards(cardsArray);
+	}
+
+	let missedCards = [];
+	let cardClassNum;
+	function renderCards(cardsArray){
+		checki: for(let i = 0; i < cardsArray.length; i++){
+			cardClassNum = 'card_5';
+
+			if(window.matchMedia('(max-width: 1401px)').matches && !window.matchMedia('(max-width: 878px)').matches){
+				cardClassNum = 'card_4';
+				if(i >= 12){
+					missedCards.push(cardsArray[i]);
+					continue checki;
+				}
+			}
+			if(window.matchMedia('(max-width: 878px)').matches && !window.matchMedia('(max-width: 530px)').matches){
+				cardClassNum = 'card_3';
+				if(i >= 18){
+					missedCards.push(cardsArray[i]);
+					continue checki;
+				}
+			}
+			if(window.matchMedia('(max-width: 530px)').matches){
+				cardClassNum = 'card_2';
+				if(i >= 4){
+					missedCards.push(cardsArray[i]);
+					continue checki;
+				}
+			}
+			if(!window.matchMedia('(max-width: 1401px)').matches){
+				cardClassNum = 'card_5';
+				if(i >= 20){
+					missedCards.push(cardsArray[i]);
+					continue checki;
+				}
+			}
+			render(cardClassNum, cardsArray[i].imgSrc, cardsArray[i].title, cardsArray[i].text);
+		}
+	}
+
+	function render(num, imgSrc, title, text){
+		const cardHTML = `<!-- Item -->
+						<div class="card ${num}">
+							<div class="card__img">
+								<img src="img/items/${imgSrc}" alt="image">
+							</div>
+							<div class="card__info">
+								<div class="card__title">${title}</div>
+								<div class="card__text">${text}</div>
+							</div>
+						</div>
+						<!--// Item -->`
+
+		cardsContainer.insertAdjacentHTML('beforeend', cardHTML);
+	}
+	
+	async function filterCards(){
+		let allChosenFilters = document.querySelectorAll('.catalog__chosen-filter');
+		let filteredCards = [];
+		let allCards = document.querySelectorAll('.card');
+		missedCards = [];
+
+		allCards.forEach(card => {
+			card.remove();
+		});
+
+		const response = await fetch('./js/cards.json');
+		const cardsArray = await response.json();
+
+		cardsArray.forEach(card => {
+			allChosenFilters.forEach(filter => {
+				card.text.split(', ').forEach(word => {
+					if(word.toLowerCase() == filter.dataset.filter.toLowerCase()) filteredCards.push(card);
+				});
+			});
+		});
+
+		filteredCards = filteredCards.filter((element, index) => {
+			return filteredCards.indexOf(element) === index;
+		});
+
+		missedCards = [];
+
+		if(window.matchMedia('(max-width: 1401px)').matches && !window.matchMedia('(max-width: 878px)').matches){
+			catalogWrapper.style.paddingBottom = '168px';
+		} else if(window.matchMedia('(max-width: 878px)').matches && !window.matchMedia('(max-width: 530px)').matches){
+			catalogWrapper.style.paddingBottom = '150px';
+		} else if(window.matchMedia('(max-width: 530px)').matches){
+			catalogWrapper.style.paddingBottom = '77px';
+		} else {
+			catalogWrapper.style.paddingBottom = '174px';
+		}
+
+		checki: for(let i = 0; i < filteredCards.length; i++){
+
+			if(cardClassNum == 'card_4'){
+				if(i >= 12){
+					missedCards.push(filteredCards[i]);
+					continue checki;
+				}
+			}else if(cardClassNum == 'card_3'){
+				if((window.matchMedia('(max-width: 1401px)').matches && !window.matchMedia('(max-width: 878px)').matches) || !window.matchMedia('(max-width: 1401px)').matches){
+					if(i >= 6){
+						missedCards.push(filteredCards[i]);
+						continue checki;
+					}
+				} else if(window.matchMedia('(max-width: 878px)').matches && !window.matchMedia('(max-width: 530px)').matches){
+					if(i >= 18){
+						missedCards.push(filteredCards[i]);
+						continue checki;
+					}
+				}
+			}else if(cardClassNum == 'card_2'){
+				if(!window.matchMedia('(max-width: 1401px)').matches){
+					if(i >= 6){
+						missedCards.push(filteredCards[i]);
+						continue checki;
+					}
+				} else if(window.matchMedia('(max-width: 1401px)').matches && !window.matchMedia('(max-width: 878px)').matches || window.matchMedia('(max-width: 530px)').matches){
+					if(i >= 4){
+						missedCards.push(filteredCards[i]);
+						continue checki;
+					}
+				} else if(window.matchMedia('(max-width: 878px)').matches && !window.matchMedia('(max-width: 530px)').matches){
+					if(i >= 8){
+						missedCards.push(filteredCards[i]);
+						continue checki;
+					}
+				}
+			}else if(cardClassNum == 'card_5'){
+				if(i >= 20){
+					missedCards.push(filteredCards[i]);
+					continue checki;
+				}
+			}
+
+			render(cardClassNum, filteredCards[i].imgSrc, filteredCards[i].title, filteredCards[i].text);
+		}
+
+		allChosenFilters = document.querySelectorAll('.catalog__chosen-filter');
+		if(allChosenFilters.length == 0){
+			renderCards(cardsArray);
+		}
+		showMoreBtn.style.display = 'block';
+	}
 	function renderChosenFilters(){
-		const chosenFilterHTML = `<div class="catalog__chosen-filter fadein">${chosenFilter.innerText} <span class="cross">✖</span></div>`;
+		const chosenFilterHTML = `<div data-filter="${chosenFilter.dataset.filter}" class="catalog__chosen-filter fadein">${chosenFilter.innerText} <span class="cross">✖</span></div>`;
 		if(!chosenFilters.find(i => i === chosenFilterHTML)){
 			chosenFiltersBlock.insertAdjacentHTML('beforeend', chosenFilterHTML);
 			chosenFilters.push(chosenFilterHTML);
@@ -22,14 +176,30 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		chosenFiltersCrosses.forEach(cross => {
 			cross.addEventListener('click', () => {
-				chosenFilters = chosenFilters.filter(i => i != `<div class="catalog__chosen-filter fadein">${cross.parentNode.innerHTML}</div>`);
+				chosenFilters = chosenFilters.filter(i => i != `<div data-filter="${cross.parentNode.dataset.filter}" class="catalog__chosen-filter fadein">${cross.parentNode.innerHTML}</div>`);
+				allFilters.forEach(filter => {
+					if(filter.dataset.filter == cross.parentNode.dataset.filter){
+						filter.classList.remove('catalog-filters__filter_active');
+					}
+				});
 				cross.parentNode.classList.add('fadeout');
-				setTimeout(() => {cross.parentNode.remove()}, 499);
+				setTimeout(() => {
+					cross.parentNode.remove();
+					filterCards();
+				}, 499);
 			});
 			cross.removeEventListener('click', () => {
-				chosenFilters = chosenFilters.filter(i => i != `<div class="catalog__chosen-filter fadein">${cross.parentNode.innerHTML}</div>`);
+				chosenFilters = chosenFilters.filter(i => i != `<div data-filter="${cross.parentNode.dataset.filter}" class="catalog__chosen-filter fadein">${cross.parentNode.innerHTML}</div>`);
+				allFilters.forEach(filter => {
+					if(filter.dataset.filter == cross.parentNode.dataset.filter){
+						filter.classList.remove('catalog-filters__filter_active');
+					}
+				});
 				cross.parentNode.classList.add('fadeout');
-				setTimeout(() => {cross.parentNode.remove()}, 499);
+				setTimeout(() => {
+					cross.parentNode.remove();
+					filterCards();
+				}, 499);
 			});
 		});
 	}
@@ -170,6 +340,8 @@ window.addEventListener('DOMContentLoaded', () => {
 			chosenFilter = event.target;
 			event.target.classList.add('catalog-filters__filter_active');
 			renderChosenFilters();
+			// Rendering filtered cards
+			filterCards();
 		}
 	});
 
@@ -192,10 +364,60 @@ window.addEventListener('DOMContentLoaded', () => {
 		removeClasses([modalOpacity, modalCenter], ['fadein', 'fadein']);
 		addClasses([modalOpacity, modalCenter], ['fadeout', 'fadeout']);
 		setTimeout(() => {
-			modalOpacity.style.display = 'none';
-			modalCenter.style.display = 'none';
 			modalOpacity.style.opacity = '0';
 			modalCenter.style.opacity = '0';
-		}, 499)
+			modalOpacity.style.display = 'none';
+			modalCenter.style.display = 'none';
+		}, 490 )
+	});
+
+	// Show more cards button
+	const showMoreBtn = document.querySelector('.button_show-more');
+	const catalogWrapper = document.querySelector('.catalog__wrapper');
+
+	showMoreBtn.addEventListener('click', () => {
+		let cardCounter = 0;
+		while(cardCounter < 10 && missedCards.length != 0){
+			render(cardClassNum, missedCards[0].imgSrc, missedCards[0].title, missedCards[0].text);
+			missedCards.shift();
+			cardCounter++;
+		}
+
+		if(missedCards.length == 0) {
+			showMoreBtn.style.display = 'none';
+			catalogWrapper.style.paddingBottom = 0;
+		}
+	});	
+
+	// Changing number of showed cards on page
+	const counterNumbersBlock = document.querySelector('.catalog-counter__menu'),
+		counterNumbers = document.querySelectorAll('.catalog-counter__number');
+
+	counterNumbersBlock.addEventListener('click', event => {
+		if(event.target.innerText == 2){
+			cardClassNum = 'card_2';
+			counterNumbers.forEach(num => num.classList.remove('catalog-counter__number_active'));
+			event.target.classList.add('catalog-counter__number_active');
+			removeClasses([itemsCounter], ['catalog-counter__text_active']);
+			filterCards();
+		} else if(event.target.innerText == 3) {
+			cardClassNum = 'card_3';
+			counterNumbers.forEach(num => num.classList.remove('catalog-counter__number_active'));
+			event.target.classList.add('catalog-counter__number_active');
+			removeClasses([itemsCounter], ['catalog-counter__text_active']);
+			filterCards();
+		} else if(event.target.innerText == 4) {
+			cardClassNum = 'card_4';
+			counterNumbers.forEach(num => num.classList.remove('catalog-counter__number_active'));
+			event.target.classList.add('catalog-counter__number_active');
+			removeClasses([itemsCounter], ['catalog-counter__text_active']);
+			filterCards();
+		} else if(event.target.innerText == 5) {
+			cardClassNum = 'card_5';
+			counterNumbers.forEach(num => num.classList.remove('catalog-counter__number_active'));
+			event.target.classList.add('catalog-counter__number_active');
+			removeClasses([itemsCounter], ['catalog-counter__text_active']);
+			filterCards();
+		}
 	});
 });

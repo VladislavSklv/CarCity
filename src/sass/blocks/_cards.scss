@@ -1,0 +1,196 @@
+.card{
+    display: inline-block;
+    margin: 0 0 36px 36px;
+    background-color: #F1F1F1;
+    border: 1px solid #C4C4C4;
+    border-radius: 10px;
+    &__img{
+        width: 100%;
+        img{
+            width: 100%;
+            border-radius: 10px 10px 0 0;
+        }
+    }
+    &__title{
+        font-weight: 600;
+        color: #000;
+    }
+    &__text{
+        font-weight: 300;
+        color: #4F4F4F;
+    }
+}
+.card_5{
+    width: calc((100% - (36px * 6)) / 5);
+    .card__info{
+        padding-left: 12px;
+        padding-bottom: 9px;
+    }
+    .card__title{
+        font-size: 14px;
+        line-height: 17px;
+        margin: 6px 0;
+    }
+    .card__text{
+        font-size: 13px;
+        line-height: 16px;
+    }
+}
+
+.card_4{
+    width: calc((100% - (36px * 5)) / 4);
+    .card__info{
+        padding-left: 16px;
+        padding-bottom: 22px;
+    }
+    .card__title{
+        font-size: 14px;
+        line-height: 17px;
+        margin: 8px 0;
+    }
+    .card__text{
+        font-size: 13px;
+        line-height: 16px;
+    }
+}
+
+.card_3{
+    width: calc((100% - (36px * 4)) / 3);
+    .card__info{
+        padding-left: 24px;
+        padding-bottom: 30px;
+    }
+    .card__title{
+        font-size: 20px;
+        line-height: 24px;
+        margin: 14px 0;
+    }
+    .card__text{
+        font-size: 18px;
+        line-height: 22px;
+    }
+}
+
+.card_2{
+    width: calc((100% - (49px * 3)) / 2);
+    margin: 0 0 49px 49px;
+    .card__info{
+        padding-left: 36px;
+        padding-bottom: 41px;
+    }
+    .card__title{
+        font-size: 32px;
+        line-height: 38px;
+        margin: 20px 0;
+    }
+    .card__text{
+        font-size: 28px;
+        line-height: 34px;
+    }
+}
+
+@media(max-width: 1401px){
+    .card_4{
+        width: calc((100% - (24px * 5)) / 4);
+        margin: 0 0 24px 24px;
+        .card__info{
+            padding-left: 7px;
+            padding-bottom: 5px;
+        }
+        .card__title{
+            font-size: 11px;
+            line-height: 13px;
+            margin: 2px 0;
+        }
+        .card__text{
+            font-size: 10px;
+            line-height: 12px;
+        }
+    }
+    .card_3{
+        width: calc((100% - (16px * 4)) / 3);
+        margin: 0 0 16px 16px;
+        .card__info{
+            padding-left: 12px;
+            padding-bottom: 8px;
+        }
+        .card__title{
+            font-size: 14px;
+            line-height: 17px;
+            margin: 4px 0;
+        }
+        .card__text{
+            font-size: 13px;
+            line-height: 16px;
+        }
+    }
+    .card_2{
+        width: calc((100% - (16px * 3)) / 2);
+        margin: 0 0 16px 16px;
+        .card__info{
+            padding-left: 24px;
+            padding-bottom: 16px;
+        }
+        .card__title{
+            font-size: 20px;
+            line-height: 24px;
+            margin: 10px 0;
+        }
+        .card__text{
+            font-size: 18px;
+            line-height: 22px;
+        }
+    }
+}
+
+@media(max-width: 878px){
+    .card_3{
+        .card__info{
+            padding-left: 6px;
+            padding-bottom: 5px;
+        }
+        .card__title{
+            font-size: 11px;
+            line-height: 13px;
+            margin: 2px 0;
+        }
+        .card__text{
+            font-size: 10px;
+            line-height: 12px;
+        }
+    }
+    .card_2{
+        .card__info{
+            padding-left: 13px;
+            padding-bottom: 9px;
+        }
+        .card__title{
+            font-size: 14px;
+            line-height: 17px;
+            margin: 5px 0;
+        }
+        .card__text{
+            font-size: 13px;
+            line-height: 16px;
+        }
+    }
+}
+
+@media(max-width: 530px){
+    .card_2{
+        width: calc(100% - (16px * 2));
+        .card__info{
+            padding-left: 16px;
+            padding-bottom: 12px;
+        }
+        .card__title{
+            font-size: 13px;
+            line-height: 16px;
+            margin: 6px 0;
+        }
+        .card__text{
+            font-size: 11px;
+            line-height: 13px;
+        }
+    }
+}

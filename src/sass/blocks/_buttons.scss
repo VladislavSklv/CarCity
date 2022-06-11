@@ -17,11 +17,22 @@
 .button:active{
 	background-color: rgba(255, 147, 49, 1);
 }
+.button_show-more{
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 280px;
+	height: 78px;
+}
 @media(max-width: 530px){
 	.button{
 		width: 151px;
 		height: 40px;
 		font-size: 14px;
 		line-height: 17px;
+	}
+	.button_show-more{
+		width: 150px;
+		height: 45px;
 	}
 }

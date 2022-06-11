@@ -39,6 +39,11 @@ function js(){
         .pipe(dest('dist/js'))
 }
 
+function json(){
+    return src('src/js/**.json')
+        .pipe(dest('dist/js'))
+}
+
 function fonts(){
     return src('src/fonts/**')
         .pipe(dest('dist/fonts'))
@@ -66,6 +71,6 @@ function image(){
 
 exports.html = html;
 exports.scss = scss;
-exports.serve = series(clear, scss, html, js, fonts, image, serve);
-exports.build = series(clear, scss, html, js, fonts, image);
+exports.serve = series(clear, scss, html, js, json, fonts, image, serve);
+exports.build = series(clear, scss, html, js, json, fonts, image);
 exports.clear = clear;
