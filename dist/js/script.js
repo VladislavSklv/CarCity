@@ -1,6 +1,33 @@
 window.addEventListener('DOMContentLoaded', () => {
-	const cardsContainer = document.querySelector('.card__wrapper'),
-		allFilters = document.querySelectorAll('.catalog-filters__filter');
+	const 
+		cardsContainer = document.querySelector('.card__wrapper'),
+		allFilters = document.querySelectorAll('.catalog-filters__filter'),
+		hamburger = document.querySelector('.header__hamburger'),
+		navbar = document.querySelector('.header-navbar'),
+		searchIcon = document.querySelector('.header__loop'),
+		allFiltersBtn = document.querySelector('#filter-all'),
+		partsFiltersBtn = document.querySelector('#filter-parts'),
+		markFiltersBtn = document.querySelector('#filter-mark'),
+		mainSubfiltersBlock = document.querySelector('.catalog-filters-main'),
+		chosenSubfilterBlock = document.querySelector('.catalog-filters__chosen-subfilter'),
+		partsBlock = document.querySelector('.catalog-filters__parts'),
+		markBlock = document.querySelector('.catalog-filters__mark'),
+		hrBlock = document.querySelector('.catalog-filters__hr'),
+		chosenSubfilter = document.querySelector('.catalog__chosen-subfilter'),
+		categoriesMenu = document.querySelector('.catalog-filters__category'),
+		itemsCounter = document.querySelector('.catalog-counter__text'),
+		chosenFiltersBlock = document.querySelector('.catalog__chosen-filters'),
+		allFiltersBlock = document.querySelector('.catalog-filters__block'),
+		moreInfoBtn = document.querySelector('.js-more-info'),
+		modalOpacity = document.querySelector('.modal-opacity'),
+		modalCenter = document.querySelector('.modal-center'),
+		showMoreBtn = document.querySelector('.button_show-more'),
+		catalogWrapper = document.querySelector('.catalog__wrapper'),
+		counterNumbersBlock = document.querySelector('.catalog-counter__menu'),
+		counterNumbers = document.querySelectorAll('.catalog-counter__number');
+
+	let chosenSubfilterVariable, missedCards = [], cardClassNum, chosenFilters = [], chosenFilter;
+	let subCross = document.querySelector('.js-sub-cross');
 
 	getCards();
 
@@ -9,11 +36,13 @@ window.addEventListener('DOMContentLoaded', () => {
 			item.classList.add(classes[i]);
 		});
 	}
+
 	function removeClasses(items, classes){
 		items.forEach((item, i) => {
 			item.classList.remove(classes[i]);
 		});
 	}
+
 	async function getCards(){
 		const response = await fetch('./js/cards.json');
 		const cardsArray = await response.json();
@@ -21,8 +50,6 @@ window.addEventListener('DOMContentLoaded', () => {
 		renderCards(cardsArray);
 	}
 
-	let missedCards = [];
-	let cardClassNum;
 	function renderCards(cardsArray){
 		checki: for(let i = 0; i < cardsArray.length; i++){
 			cardClassNum = 'card_5';
@@ -131,7 +158,7 @@ window.addEventListener('DOMContentLoaded', () => {
 						continue checki;
 					}
 				}
-			}else if(cardClassNum == 'card_2'){
+			} else if(cardClassNum == 'card_2'){
 				if(!window.matchMedia('(max-width: 1401px)').matches){
 					if(i >= 6){
 						missedCards.push(filteredCards[i]);
@@ -160,10 +187,55 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		allChosenFilters = document.querySelectorAll('.catalog__chosen-filter');
 		if(allChosenFilters.length == 0){
-			renderCards(cardsArray);
+			let cardsArrayWithSubfilters = cardsArray.filter(card => card.type == chosenSubfilterVariable || chosenSubfilterVariable == 'Все');
+			checki: for(let i = 0; i < cardsArrayWithSubfilters.length; i++){
+				if(cardClassNum == 'card_4'){
+					if(i >= 12){
+						missedCards.push(cardsArrayWithSubfilters[i]);
+						continue checki;
+					}
+				}else if(cardClassNum == 'card_3'){
+					if((window.matchMedia('(max-width: 1401px)').matches && !window.matchMedia('(max-width: 878px)').matches) || !window.matchMedia('(max-width: 1401px)').matches){
+						if(i >= 6){
+							missedCards.push(cardsArrayWithSubfilters[i]);
+							continue checki;
+						}
+					} else if(window.matchMedia('(max-width: 878px)').matches && !window.matchMedia('(max-width: 530px)').matches){
+						if(i >= 18){
+							missedCards.push(cardsArrayWithSubfilters[i]);
+							continue checki;
+						}
+					}
+				}else if(cardClassNum == 'card_2'){
+					if(!window.matchMedia('(max-width: 1401px)').matches){
+						if(i >= 6){
+							missedCards.push(cardsArrayWithSubfilters[i]);
+							continue checki;
+						}
+					} else if(window.matchMedia('(max-width: 1401px)').matches && !window.matchMedia('(max-width: 878px)').matches || window.matchMedia('(max-width: 530px)').matches){
+						if(i >= 4){
+							missedCards.push(cardsArrayWithSubfilters[i]);
+							continue checki;
+						}
+					} else if(window.matchMedia('(max-width: 878px)').matches && !window.matchMedia('(max-width: 530px)').matches){
+						if(i >= 8){
+							missedCards.push(cardsArrayWithSubfilters[i]);
+							continue checki;
+						}
+					}
+				}else if(cardClassNum == 'card_5'){
+					if(i >= 20){
+						missedCards.push(cardsArrayWithSubfilters[i]);
+						continue checki;
+					}
+				}
+	
+				render(cardClassNum, cardsArrayWithSubfilters[i].imgSrc, cardsArrayWithSubfilters[i].title, cardsArrayWithSubfilters[i].text);
+			}
 		}
 		showMoreBtn.style.display = 'block';
 	}
+
 	function renderChosenFilters(){
 		const chosenFilterHTML = `<div data-filter="${chosenFilter.dataset.filter}" class="catalog__chosen-filter fadein">${chosenFilter.innerText} <span class="cross">✖</span></div>`;
 		if(!chosenFilters.find(i => i === chosenFilterHTML)){
@@ -205,9 +277,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 
 	// hamburger switch classes and navbar
-	const hamburger = document.querySelector('.header__hamburger');
-	const navbar = document.querySelector('.header-navbar');
-
 	hamburger.addEventListener('click', () =>{
 		if(hamburger.classList.contains('header__hamburger_active')) {
 			hamburger.classList.remove('header__hamburger_active');
@@ -217,9 +286,8 @@ window.addEventListener('DOMContentLoaded', () => {
 			navbar.classList.add('header-navbar_active');
 		}
 	});
-	// Search
-	const searchIcon = document.querySelector('.header__loop');
 
+	// Search
 	searchIcon.addEventListener('click', () => {
 		if(searchIcon.classList.contains('header__loop_active')) {
 			searchIcon.classList.remove('header__loop_active');
@@ -227,19 +295,6 @@ window.addEventListener('DOMContentLoaded', () => {
 			searchIcon.classList.add('header__loop_active');
 		}
 	});
-
-	// Subilters
-	// Subfilter buttons and blocks
-	const allFiltersBtn = document.querySelector('#filter-all'),
-		partsFiltersBtn = document.querySelector('#filter-parts'),
-		markFiltersBtn = document.querySelector('#filter-mark'),
-		mainSubfiltersBlock = document.querySelector('.catalog-filters-main'),
-		chosenSubfilterBlock = document.querySelector('.catalog-filters__chosen-subfilter'),
-		partsBlock = document.querySelector('.catalog-filters__parts'),
-		markBlock = document.querySelector('.catalog-filters__mark'),
-		hrBlock = document.querySelector('.catalog-filters__hr'),
-		chosenSubfilter = document.querySelector('.catalog__chosen-subfilter');
-	let subCross = document.querySelector('.js-sub-cross');
 
 	// Adding event listeners on filters section
 	mainSubfiltersBlock.addEventListener('click', event => {
@@ -259,6 +314,8 @@ window.addEventListener('DOMContentLoaded', () => {
 				} else {
 					chosenSubfilterBlock.innerText = allFiltersBtn.innerText;
 				}
+				chosenSubfilterVariable = 'Все';
+				filterCards();
 				break;
 			case partsFiltersBtn:
 				itemsToRemove = [allFiltersBtn, markFiltersBtn, categoriesMenu, mainSubfiltersBlock, markBlock, hrBlock, chosenSubfilter];
@@ -273,6 +330,8 @@ window.addEventListener('DOMContentLoaded', () => {
 				} else{
 					chosenSubfilterBlock.innerText = partsFiltersBtn.innerText;
 				}
+				chosenSubfilterVariable = 'Запчасти и расходники';
+				filterCards();
 				break;
 			case markFiltersBtn:
 				itemsToRemove = [allFiltersBtn, partsFiltersBtn, categoriesMenu, mainSubfiltersBlock, partsBlock, hrBlock, chosenSubfilter];
@@ -287,6 +346,8 @@ window.addEventListener('DOMContentLoaded', () => {
 				} else{
 					chosenSubfilterBlock.innerText = markFiltersBtn.innerText;
 				}
+				chosenSubfilterVariable = 'Марка автомобиля';
+				filterCards();
 				break;
 		}
 		subCross = document.querySelector('.js-sub-cross');
@@ -309,8 +370,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 	// Category menu
-	const categoriesMenu = document.querySelector('.catalog-filters__category');
-
 	categoriesMenu.addEventListener('click', () =>{
 		if(!categoriesMenu.classList.contains('catalog-filters__category_active')){
 			categoriesMenu.classList.add('catalog-filters__category_active');
@@ -322,19 +381,12 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 	// Items/Cards count
-	const itemsCounter = document.querySelector('.catalog-counter__text');
-
 	itemsCounter.addEventListener('click', () => {
 		if(!itemsCounter.classList.contains('catalog-counter__text_active')) addClasses([itemsCounter], ['catalog-counter__text_active']);
 		else removeClasses([itemsCounter], ['catalog-counter__text_active']);
 	});
 
 	// Adding chosen filters
-	const chosenFiltersBlock = document.querySelector('.catalog__chosen-filters'),
-		allFiltersBlock = document.querySelector('.catalog-filters__block');
-	let chosenFilters = [];
-	let chosenFilter;
-
 	allFiltersBlock.addEventListener('click', event => {
 		if(event.target.classList.contains('catalog-filters__filter')){
 			chosenFilter = event.target;
@@ -346,11 +398,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 	// More info modal
-	const moreInfoBtn = document.querySelector('.js-more-info'),
-		modalOpacity = document.querySelector('.modal-opacity'),
-		modalCenter = document.querySelector('.modal-center');
-
-
 	moreInfoBtn.addEventListener('click', () => {
 		modalOpacity.style.display = 'block';
 		modalCenter.style.display = 'block';
@@ -372,9 +419,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 	// Show more cards button
-	const showMoreBtn = document.querySelector('.button_show-more');
-	const catalogWrapper = document.querySelector('.catalog__wrapper');
-
 	showMoreBtn.addEventListener('click', () => {
 		let cardCounter = 0;
 		while(cardCounter < 10 && missedCards.length != 0){
@@ -390,9 +434,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	});	
 
 	// Changing number of showed cards on page
-	const counterNumbersBlock = document.querySelector('.catalog-counter__menu'),
-		counterNumbers = document.querySelectorAll('.catalog-counter__number');
-
 	counterNumbersBlock.addEventListener('click', event => {
 		if(event.target.innerText == 2){
 			cardClassNum = 'card_2';
