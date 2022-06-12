@@ -26,7 +26,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		counterNumbersBlock = document.querySelector('.catalog-counter__menu'),
 		counterNumbers = document.querySelectorAll('.catalog-counter__number');
 
-	let chosenSubfilterVariable, missedCards = [], cardClassNum, chosenFilters = [], chosenFilter;
+	let chosenSubfilterVariable = 'Все', missedCards = [], cardClassNum, chosenFilters = [], chosenFilter;
 	let subCross = document.querySelector('.js-sub-cross');
 
 	getCards();
@@ -40,6 +40,46 @@ window.addEventListener('DOMContentLoaded', () => {
 	function removeClasses(items, classes){
 		items.forEach((item, i) => {
 			item.classList.remove(classes[i]);
+		});
+	}
+
+	function renderChosenFilters(){
+		const chosenFilterHTML = `<div data-filter="${chosenFilter.dataset.filter}" class="catalog__chosen-filter fadein">${chosenFilter.innerText} <span class="cross">✖</span></div>`;
+		if(!chosenFilters.find(i => i === chosenFilterHTML)){
+			chosenFiltersBlock.insertAdjacentHTML('beforeend', chosenFilterHTML);
+			chosenFilters.push(chosenFilterHTML);
+		}
+			
+		// Removing chosen filters
+		const chosenFiltersCrosses = document.querySelectorAll('.cross');
+
+		chosenFiltersCrosses.forEach(cross => {
+			cross.addEventListener('click', () => {
+				chosenFilters = chosenFilters.filter(i => i != `<div data-filter="${cross.parentNode.dataset.filter}" class="catalog__chosen-filter fadein">${cross.parentNode.innerHTML}</div>`);
+				allFilters.forEach(filter => {
+					if(filter.dataset.filter == cross.parentNode.dataset.filter){
+						filter.classList.remove('catalog-filters__filter_active');
+					}
+				});
+				cross.parentNode.classList.add('fadeout');
+				setTimeout(() => {
+					cross.parentNode.remove();
+					filterCards();
+				}, 499);
+			});
+			cross.removeEventListener('click', () => {
+				chosenFilters = chosenFilters.filter(i => i != `<div data-filter="${cross.parentNode.dataset.filter}" class="catalog__chosen-filter fadein">${cross.parentNode.innerHTML}</div>`);
+				allFilters.forEach(filter => {
+					if(filter.dataset.filter == cross.parentNode.dataset.filter){
+						filter.classList.remove('catalog-filters__filter_active');
+					}
+				});
+				cross.parentNode.classList.add('fadeout');
+				setTimeout(() => {
+					cross.parentNode.remove();
+					filterCards();
+				}, 499);
+			});
 		});
 	}
 
@@ -84,6 +124,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			}
 			render(cardClassNum, cardsArray[i].imgSrc, cardsArray[i].title, cardsArray[i].text);
 		}
+		addModalsToCards();
 	}
 
 	function render(num, imgSrc, title, text){
@@ -233,45 +274,16 @@ window.addEventListener('DOMContentLoaded', () => {
 				render(cardClassNum, cardsArrayWithSubfilters[i].imgSrc, cardsArrayWithSubfilters[i].title, cardsArrayWithSubfilters[i].text);
 			}
 		}
+		addModalsToCards();
 		showMoreBtn.style.display = 'block';
 	}
 
-	function renderChosenFilters(){
-		const chosenFilterHTML = `<div data-filter="${chosenFilter.dataset.filter}" class="catalog__chosen-filter fadein">${chosenFilter.innerText} <span class="cross">✖</span></div>`;
-		if(!chosenFilters.find(i => i === chosenFilterHTML)){
-			chosenFiltersBlock.insertAdjacentHTML('beforeend', chosenFilterHTML);
-			chosenFilters.push(chosenFilterHTML);
-		}
-			
-		// Removing chosen filters
-		const chosenFiltersCrosses = document.querySelectorAll('.cross');
-
-		chosenFiltersCrosses.forEach(cross => {
-			cross.addEventListener('click', () => {
-				chosenFilters = chosenFilters.filter(i => i != `<div data-filter="${cross.parentNode.dataset.filter}" class="catalog__chosen-filter fadein">${cross.parentNode.innerHTML}</div>`);
-				allFilters.forEach(filter => {
-					if(filter.dataset.filter == cross.parentNode.dataset.filter){
-						filter.classList.remove('catalog-filters__filter_active');
-					}
-				});
-				cross.parentNode.classList.add('fadeout');
-				setTimeout(() => {
-					cross.parentNode.remove();
-					filterCards();
-				}, 499);
-			});
-			cross.removeEventListener('click', () => {
-				chosenFilters = chosenFilters.filter(i => i != `<div data-filter="${cross.parentNode.dataset.filter}" class="catalog__chosen-filter fadein">${cross.parentNode.innerHTML}</div>`);
-				allFilters.forEach(filter => {
-					if(filter.dataset.filter == cross.parentNode.dataset.filter){
-						filter.classList.remove('catalog-filters__filter_active');
-					}
-				});
-				cross.parentNode.classList.add('fadeout');
-				setTimeout(() => {
-					cross.parentNode.remove();
-					filterCards();
-				}, 499);
+	function addModalsToCards() {
+		const cards = document.querySelectorAll('.card');
+		
+		cards.forEach(card => {
+			card.addEventListener('click', () => {
+				console.log(card);
 			});
 		});
 	}
@@ -358,6 +370,8 @@ window.addEventListener('DOMContentLoaded', () => {
 			}, 499);
 			removeClasses([partsFiltersBtn, markFiltersBtn, categoriesMenu, mainSubfiltersBlock], ['catalog-filters-main__subfilter_active', 'catalog-filters-main__subfilter_active', 'catalog-filters__category_active', 'catalog-filters-main_active']);
 			addClasses([allFiltersBtn, partsBlock, markBlock, hrBlock], ['catalog-filters-main__subfilter_active', "catalog-filters__parts_active", "catalog-filters__mark_active", "catalog-filters__hr_active"]);
+			chosenSubfilterVariable = 'Все';
+			filterCards();	
 		});
 	});
 	subCross.addEventListener('click', () => {
@@ -367,6 +381,8 @@ window.addEventListener('DOMContentLoaded', () => {
 		}, 499);
 		removeClasses([partsFiltersBtn, markFiltersBtn, categoriesMenu, mainSubfiltersBlock], ['catalog-filters-main__subfilter_active', 'catalog-filters-main__subfilter_active', 'catalog-filters__category_active', 'catalog-filters-main_active']);
 		addClasses([allFiltersBtn, partsBlock, markBlock, hrBlock], ['catalog-filters-main__subfilter_active', "catalog-filters__parts_active", "catalog-filters__mark_active", "catalog-filters__hr_active"]);
+		chosenSubfilterVariable = 'Все';
+		filterCards();
 	});
 
 	// Category menu
