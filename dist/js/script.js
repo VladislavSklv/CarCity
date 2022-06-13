@@ -444,15 +444,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	modalOpacity.addEventListener('click', () => {
 		const modalCard = document.querySelector('.modal-card');
-		removeClasses([modalOpacity, modalCenter, modalCard], ['fadein', 'fadein', 'fadein']);
-		addClasses([modalOpacity, modalCenter, modalCard], ['fadeout', 'fadeout', 'fadeout']);
+		removeClasses([modalOpacity, modalCenter], ['fadein', 'fadein']);
+		addClasses([modalOpacity, modalCenter], ['fadeout', 'fadeout']);
+		if(modalCard){
+			modalCard.classList.remove('fadein');
+			modalCard.classList.add('fadeout');
+		}
 		setTimeout(() => {
 			modalOpacity.style.opacity = '0';
 			modalCenter.style.opacity = '0';
-			modalCard.style.opacity = '0';
+			if(modalCard) {
+				modalCard.style.opacity = '0';
+				modalCard.remove();
+			}
 			modalOpacity.style.display = 'none';
 			modalCenter.style.display = 'none';
-			modalCard.remove();
 		}, 490);
 	});
 
