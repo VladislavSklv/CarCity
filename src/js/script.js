@@ -283,7 +283,26 @@ window.addEventListener('DOMContentLoaded', () => {
 		
 		cards.forEach(card => {
 			card.addEventListener('click', () => {
-				console.log(card);
+				modalOpacity.style.display = 'block';
+				removeClasses([modalOpacity], ['fadeout']);
+				addClasses([modalOpacity], ['fadein']);
+				modalOpacity.style.opacity = '1';
+
+				const cardImg = card.childNodes[1];
+				const cardInfo = card.childNodes[3];
+				const modalCardHTML = `<!-- Modal Card-->
+				<div class="modal-card fadein">
+					<div class="modal-card__img">
+						<img src="${cardImg.childNodes[1].src}" alt="image">
+					</div>
+					<div class="modal-card__info">
+						<div class="modal-card__title">${cardInfo.childNodes[1].innerText}</div>
+						<div class="modal-card__text">${cardInfo.childNodes[3].innerText}</div>
+					</div>
+				</div>
+				<!--// Modal Card -->`;
+
+				document.body.insertAdjacentHTML('beforeend', modalCardHTML);
 			});
 		});
 	}
@@ -424,14 +443,17 @@ window.addEventListener('DOMContentLoaded', () => {
 	});
 
 	modalOpacity.addEventListener('click', () => {
-		removeClasses([modalOpacity, modalCenter], ['fadein', 'fadein']);
-		addClasses([modalOpacity, modalCenter], ['fadeout', 'fadeout']);
+		const modalCard = document.querySelector('.modal-card');
+		removeClasses([modalOpacity, modalCenter, modalCard], ['fadein', 'fadein', 'fadein']);
+		addClasses([modalOpacity, modalCenter, modalCard], ['fadeout', 'fadeout', 'fadeout']);
 		setTimeout(() => {
 			modalOpacity.style.opacity = '0';
 			modalCenter.style.opacity = '0';
+			modalCard.style.opacity = '0';
 			modalOpacity.style.display = 'none';
 			modalCenter.style.display = 'none';
-		}, 490 )
+			modalCard.remove();
+		}, 490);
 	});
 
 	// Show more cards button
